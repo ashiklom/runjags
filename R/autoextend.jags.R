@@ -409,7 +409,8 @@ autoextend.jags <- function(runjags.object, add.monitor=character(0), drop.monit
 		if(!is.numeric(convergence$mpsrf)){
 			mpsrfstring <- " (Unable to calculate the multi-variate psrf)"
 		}else{
-			mpsrfstring <- paste(" (multi-variate psrf = ", round(convergence$mpsrf, digits=3), ")", sep="")
+		        mpsrfstring <- as.character(convergence$mpsrf)
+			#mpsrfstring <- paste(" (multi-variate psrf = ", round(convergence$mpsrf, digits=3), ")", sep="")
 		}
 			
 		swcat("The Gelman-Rubin statistic was above ", psrf.target, " for ", unconverged, " parameter", if(unconverged>1) "s", " after ", additional$burnin+additional$sample, " iterations taking ", timestring(additional$timetaken), " ", mpsrfstring, ".  This may indicate poor convergence.\n", sep="")
@@ -491,7 +492,7 @@ autoextend.jags <- function(runjags.object, add.monitor=character(0), drop.monit
 				}	
 			}
 									
-			if(is.numeric(convergence$mpsrf)){
+			if(!is.numeric(convergence$mpsrf)){
 				mpsrfstring <- " (Unable to calculate the multi-variate psrf)"
 			}else{
 				mpsrfstring <- paste(" (multi-variate psrf = ", round(convergence$mpsrf, digits=3), ")", sep="")

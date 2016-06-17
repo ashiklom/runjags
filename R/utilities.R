@@ -225,7 +225,10 @@ new_unique <- function(name=NA, suffix="", ask=FALSE, prompt="A file or director
 
 timestring <- function(time1, time2=NA, units=NA, show.units=TRUE){
 	
-	time <- na.omit(c(time1, time2))
+        time <- numeric(0)
+        if(!is.na(time1)) time <- time1
+        if(!is.na(time1) & !is.na(time2)) time <- c(time1, time2)
+	#time <- na.omit(c(time1, time2))
 	
 	if(length(time)==2){
 		time <- as.integer(difftime(time[2], time[1], units="secs")*10)
